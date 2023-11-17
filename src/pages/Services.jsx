@@ -1,4 +1,4 @@
-function Home (){
+function Services (){
 
 
     return (
@@ -11,4 +11,4 @@ function Home (){
     )
 }
 
-export default Home; 
+export default Services; 
