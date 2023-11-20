@@ -1,6 +1,6 @@
 import Employee from './Employee';
 import {useState,useEffect } from 'react';
-import {getFirestore, collection, onSnapshot, addDoc} from "firebase/firestore";
+import {getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc} from "firebase/firestore";
 import firebaseApp from "./firebaseConfig";
 
 
@@ -27,7 +27,9 @@ function Home (){
                 const newEmployeeList = [];
 
                 snapshot.forEach(employee => {
-                    newEmployeeList.push(employee.data());
+                    const tempEmployee = employee.data();
+                    tempEmployee["employee_id"] = employee.id;
+                    newEmployeeList.push(tempEmployee);
                 });
 
                 setEmployeeList(newEmployeeList);
@@ -67,6 +69,17 @@ function Home (){
         }
 
     }
+
+    const deleteEmployee = (employeeID, firstname, lastname) => {
+
+           //initialize Cloud firestore and get a reference to the service
+           const db= getFirestore(firebaseApp);
+
+       confirm (`Are you sure you want to delete ${firstname} ${lastname}?`).then(
+        deleteDoc(doc(db, "employees", employeeID))
+       );
+
+    } 
 
     return (
         
@@ -137,6 +150,8 @@ function Home (){
                 firstname={employeeRecord.firstname}
                 lastname={employeeRecord.lastname}
                 number={employeeRecord.number}
+                deleteEmployee={deleteEmployee}
+                employeeID= {employeeRecord.employee_id}
                 />
                 )
             }
