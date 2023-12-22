@@ -1,4 +1,4 @@
-function Employee ({firstname, lastname, number, deleteEmployee, employeeID}){
+function Employee ({firstname, lastname, number, deleteEmployee, updateEmployee, employeeID}){
 
 
     return (
@@ -10,7 +10,11 @@ function Employee ({firstname, lastname, number, deleteEmployee, employeeID}){
             }} 
             
             className="btn btn-danger btn-sm float-end"> Delete </button>
-            <button className="btn btn-secondary btn-sm float-end me-2"> Edit </button>
+             <button onClick= {()=> {
+                updateEmployee (employeeID, firstname, lastname, number)
+             }}
+             
+            className="btn btn-secondary btn-sm float-end me-2"> Edit </button>
         </div>
         
     )

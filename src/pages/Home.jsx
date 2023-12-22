@@ -1,6 +1,6 @@
 import Employee from './Employee';
 import {useState,useEffect } from 'react';
-import {getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc} from "firebase/firestore";
+import {getFirestore, collection, onSnapshot, addDoc, deleteDoc, updateDoc, doc} from "firebase/firestore";
 import firebaseApp from "./firebaseConfig";
 
 
@@ -14,6 +14,8 @@ function Home (){
 
       //Array of an object, once we hit add ag append sa studentlist
     const [employeeList, setEmployeeList] = useState([]); 
+
+    const [editToggle, setEditToggle] = useState(false);
 
     useEffect(() => {
 
@@ -81,10 +83,44 @@ function Home (){
 
     } 
 
+
+    const updateEmployee = ( employeeID, firstname, lastname, number) => {
+        setEditToggle(true);
+
+        setEmployee({
+            employeeID :  employeeID,
+            firstname: firstname,
+            lastname: lastname,
+            number: number
+        });
+    }
+
+    const handleStudentUpdate =() => {
+
+         //initialize Cloud firestore and get a reference to the service
+         const db= getFirestore(firebaseApp);
+
+         const employeeRef = doc(db, "employees", employee.employeeID );
+
+         updateDoc(employeeRef, {
+            firstname: employee.firstname,
+            lastname: employee.lastname,
+            number: employee.number
+
+         });
+
+        setEditToggle(false);
+        setEmployee({
+            firstname:'',
+            lastname:'',
+            number:'',
+        });
+    }
+
     return (
         
         <section>
-        <h1 className="mt-5" >👩‍🏭Employee Dashboard</h1>
+        <h1 className="mt-5" >👩‍🏭Employee Management Dashboard</h1>
         <p>A tool for HR Departments and organizations to manage employee data.</p>
     
         <div className="mb-5 p-5 border">
@@ -130,13 +166,29 @@ function Home (){
                 />
                 </div>
 
-                <div className="col-md-2">
+                {
+                   editToggle 
+                   ?
+
+                   (
+                    <div className="col-md-2">
+                        <button onClick={() => {handleStudentUpdate()}} className="btn btn-success mt-3">Update</button>
+                    </div>
+                   )
+
+                   :
+
+                   (
+                    <div className="col-md-2">
                         <button onClick={() => {addEmployee()}} className="btn btn-dark mt-3">Add Employee +</button>
                     </div>
+                   )
+                }
+
+                
 
                     <div className="alert alert-light mt-3">
                         <h3 className="fw-bold">{employee.firstname} {employee.lastname} <span className="badge bg-dark"> {employee.number} </span></h3>
-
                     </div>
                 </div>
                 <br />
@@ -151,6 +203,7 @@ function Home (){
                 lastname={employeeRecord.lastname}
                 number={employeeRecord.number}
                 deleteEmployee={deleteEmployee}
+                updateEmployee={updateEmployee}
                 employeeID= {employeeRecord.employee_id}
                 />
                 )
