@@ -5,7 +5,8 @@ import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Services from "./pages/Services.jsx"
 import NotFound from "./pages/NotFound.jsx"
-import Login from "./pages/Login.jsx";
+import Login from "./pages/auth/Login.jsx";
+import Register from "./pages/auth/Register.jsx";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
@@ -20,8 +21,10 @@ function App() {
         <Route path="contact" element={<Contact/>}/>
         <Route path="services" element={<Services/>}/>
         <Route path="login" element={<Login/>}/>
+        <Route path="register" element={<Register/>}/>
+        <Route path="*" element={<NotFound/>}/>
       </Route>
-      <Route path="*" element={<NotFound/>}/>
+     
     </Routes>
     </BrowserRouter>
   
