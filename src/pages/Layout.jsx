@@ -49,20 +49,7 @@ function Layout (){
                 </button>
 
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-
-                            <li className="nav-item active">
-                                <Link className="nav-link" to="about">About</Link>
-                            </li>
-
-                            <li className="nav-item active">
-                                <Link className="nav-link" to="services">Services</Link>
-                            </li>
-
-                            <li className="nav-item active">
-                                <Link className="nav-link" to="contact">Contact</Link>
-                            </li>
-                            </ul>
+                  
                           
                                 <ul className="navbar-nav ms-auto">
                                 { authenticated
