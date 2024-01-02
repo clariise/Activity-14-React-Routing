@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "../firebaseConfig";
 import {useState } from 'react';
@@ -8,22 +8,22 @@ function Login (){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    let navigate = useNavigate ();
+
     const handleLogin =() => {
 
         if (email !== '' && password !== ''){
     const auth = getAuth(firebaseApp);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        alert("Signed In");
         // Signed up 
         const user = userCredential.user;
+        alert("Signed In");
+        navigate("/");
         // ...
       })
       .catch((error) => {
         alert("error");
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
       });
 
     }else {

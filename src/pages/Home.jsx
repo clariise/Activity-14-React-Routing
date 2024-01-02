@@ -5,7 +5,7 @@ import firebaseApp from "./firebaseConfig";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 
-function Home (auth){
+function Home (){
 
     const [employee, setEmployee] = useState ({
         firstname: '',
@@ -15,30 +15,15 @@ function Home (auth){
 
       //Array of an object, once we hit add ag append sa studentlist
     const [employeeList, setEmployeeList] = useState([]); 
-
-const [authenticated, setAuthenticated] = useState (false);
-
+    const [authenticated, setAuthenticated] = useState (false);
     const [editToggle, setEditToggle] = useState(false);
+    const [userProperties, setUserProperties] = useState({});
 
     useEffect(() => {
 
 
         //initialize Cloud firestore and get a reference to the service
         const db= getFirestore(firebaseApp);
-
-        const auth = getAuth(firebaseApp);
-        onAuthStateChanged(auth, (user) => {
-
-            console.log(user);
-            if (user) {
-                setAuthenticated (true);
-                //user is signed in, look for docs for a list of available properties
-
-                const uid = user.uid;
-               
-
-            }
-        });
 
             try  { 
                 
@@ -59,6 +44,22 @@ const [authenticated, setAuthenticated] = useState (false);
             } catch(e){
                 alert('Could not fetch employee data.')
             }
+
+            const auth = getAuth(firebaseApp);
+            onAuthStateChanged(auth, (user) => {
+    
+                console.log(user);
+                if (user) {
+                    setAuthenticated (true);
+                    console.log(user.providerData);
+                    setUserProperties(user);
+                    //user is signed in, look for docs for a list of available properties
+    
+                    const uid = user.uid;
+                   
+    
+                }
+            });
 
 }, [])
 
@@ -134,13 +135,13 @@ const [authenticated, setAuthenticated] = useState (false);
         });
     }
 
-    if (auth) {
+    if (authenticated) {
 
         return (
         
         
             <section>
-            <h1 className="mt-5" >👩‍🏭Employee Management Dashboard</h1>
+            <h1 className="mt-5" >👩‍🏭Hello, {userProperties.displayName}</h1>
             <p>A tool for HR Departments and organizations to manage employee data.</p>
         
             <div className="mb-5 p-5 border">

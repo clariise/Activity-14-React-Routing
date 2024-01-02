@@ -1,31 +1,42 @@
-import {Outlet, Link } from "react-router-dom";
+import {Outlet, Link, useNavigate} from "react-router-dom";
 import {useState,useEffect } from 'react';
 import firebaseApp from "./firebaseConfig";
-import {getAuth, onAuthStateChanged} from "firebase/auth";
+import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
 
 function Layout (){
 
     const [authenticated, setAuthenticated] = useState (false)
 
+    let navigate = useNavigate ();
     useEffect(() => {
         
         const auth = getAuth(firebaseApp);
-        const user = auth.currentUser;
 
         onAuthStateChanged(auth, (user) => {
 
             console.log(user);
             if (user) {
+                console.log(user.email);
                 setAuthenticated (true);
                 //user is signed in, look for docs for a list of available properties
-
                 const uid = user.uid;
-               
+            }else {
 
+                //user is signed out
             }
         });
 
         }, [])
+
+        const logout = () => {
+            const auth = getAuth (firebaseApp);
+            signOut (auth).then(() => {
+                setAuthenticated (false);
+                navigate("/login");
+            }).catch ((error) => {
+                //an error happened
+            });
+        }
 
     return (
         <>
@@ -51,33 +62,33 @@ function Layout (){
                             <li className="nav-item active">
                                 <Link className="nav-link" to="contact">Contact</Link>
                             </li>
-
-                            <li className="nav-item active">
-                                <Link className="nav-link" to="login">Login</Link>
-                            </li>
-
-                            <li className="nav-item active">
-                                <Link className="nav-link" to="register">Register</Link>
-                            </li>
-
-                            { auth 
+                            </ul>
+                          
+                                <ul className="navbar-nav ms-auto">
+                                { authenticated
                                 ? 
-                                <li className="nav-item active">
-                                <Link className="nav-link" to="logout">Logout</Link>
-                                 </li>
-                                :
-                                <></>
-                        }
-                    
-                        </ul>
-                        
+                                    <li className="nav-item active">
+                                        <Link className="nav-link" onClick={logout} >Logout</Link>
+                                    </li>
+                                        :
+                                    <>
+                                        <li className="nav-item active">
+                                            <Link className="nav-link" to="login">Login</Link>
+                                        </li>
+
+                                        <li className="nav-item active">
+                                            <Link className="nav-link" to="register">Register</Link>
+                                        </li>
+                                    </>
+                                    }
+                                 </ul>
                     </div>
                     </div>
             </nav>
             
 
             <div className="container p-3">
-            <Outlet auth={authenticated} ></Outlet>
+            <Outlet ></Outlet>
             </div>
             </main>
 

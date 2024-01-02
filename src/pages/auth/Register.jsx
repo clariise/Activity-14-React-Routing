@@ -11,6 +11,8 @@ function Register(){
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    let navigate = useNavigate ();
+
     const handleRegistration =() => {
 
         if (firstname !== '' && lastname !== '' && email !== '' && password !== '' && confirmPassword !== '' && password == confirmPassword){
@@ -21,13 +23,10 @@ function Register(){
           const user = userCredential.user;
 
             updateProfile(auth.currentUser, {
-            firstname: firstname, lastname: lastname
+            displayName: firstname + " " + lastname
           });
-
-        alert("Registered Successfully!").then (() => {
-          navigate('/')
-
-        });
+          navigate("/");
+      
 
 
 
