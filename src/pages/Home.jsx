@@ -106,7 +106,7 @@ function Home (){
         setEditToggle(true);
 
         setEmployee({
-            employeeID :  employeeID,
+            employeeID : employeeID,
             firstname: firstname,
             lastname: lastname,
             number: number
@@ -142,7 +142,7 @@ function Home (){
         
             <section>
             <h1 className="mt-5" >👩‍🏭Hello, {userProperties.displayName}</h1>
-            <p>A tool for HR Departments and organizations to manage employee data.</p>
+            <p>This is an employee records of our organization.</p>
         
             <div className="mb-5 p-5 border">
                     <div className="row">
@@ -205,10 +205,7 @@ function Home (){
                         </div>
                        )
                     }
-    
-                        <div className="alert alert-light mt-3">
-                            <h3 className="fw-bold">{employee.firstname} {employee.lastname} <span className="badge bg-dark"> {employee.number} </span></h3>
-                        </div>
+                       
                     </div>
                     <br />
                     </div>
@@ -232,7 +229,7 @@ function Home (){
             }else {
                 return (
                     <section>
-                        <h1>Hello Guest</h1>
+                        <h1 className='fw-bold ' >WELCOME GUEST!</h1>
                     </section>
                 )
         

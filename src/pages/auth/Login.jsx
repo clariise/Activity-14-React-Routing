@@ -33,9 +33,9 @@ function Login (){
 
     return (
 
-     <div className= "container">
+     <div className= "container boarder p-5 rounded mt-5 shadow">
         <h1 className="fw-bold">Login</h1>
-        <p>Please enter your email and password to Login</p>
+        <p>Please Login to your account.</p>
 
        
         <label htmlFor="email">Email</label>
@@ -53,7 +53,7 @@ function Login (){
 
         <button className="btn btn-warning mt-3" onClick={()=> handleLogin()} >Login</button>
         <hr></hr>
-        <Link to="login"> Don't have an account? Register here. </Link>
+        <Link to="/Register"> Don't have an account? Register here. </Link>
 
      </div>
      
