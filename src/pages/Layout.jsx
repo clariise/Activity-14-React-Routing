@@ -43,7 +43,7 @@ function Layout (){
         <main className="d-flex flex-column min-vh-100">
             <nav className="navbar navbar-expand-lg navbar-light bg-warning">
                 <div className= "container-fluid">
-                <Link className="navbar-brand fw-bold p-2 shadow" to="/">Home</Link>
+                <Link className="navbar-brand fw-bold p-2 shadow" to="/">EmployeeMD</Link>
                 <button className="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
