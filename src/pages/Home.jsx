@@ -230,7 +230,7 @@ function Home (){
                 return (
                     <section>
                        <div className= "container boarder p-5 rounded mt-5 shadow">
-                        <h1 className="fw-bold">WELCOME GUEST!</h1>
+                        <img src="src/pages/png_2.webp" alt="welcome" width={1080} />
                          </div>
                         
                     </section>
