@@ -229,11 +229,15 @@ function Home (){
             }else {
                 return (
                     <section>
-                        <h1 className='fw-bold ' >WELCOME GUEST!</h1>
+                       <div className= "container boarder p-5 rounded mt-5 shadow">
+                        <h1 className="fw-bold">WELCOME GUEST!</h1>
+                         </div>
+                        
                     </section>
                 )
         
     }
 }
+
 
 export default Home;

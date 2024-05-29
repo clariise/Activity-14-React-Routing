@@ -26,12 +26,7 @@ function Register(){
             displayName: firstname + " " + lastname
           });
           navigate("/");
-      
 
-
-
-
-        
       })
       .catch((error) => {
         alert("error");
