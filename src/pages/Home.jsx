@@ -230,7 +230,9 @@ function Home (){
                 return (
                     <section>
                        <div className= "container boarder p-5 rounded mt-5 shadow">
-                        <img src="src/png_2.webp" alt="welcome" width={1080} />
+                        <div class="row">
+                            <img src="src/png_2.webp" alt="welcome" width={1080} height={'auto'}/>
+                            </div>
                          </div>
                         
                     </section>
